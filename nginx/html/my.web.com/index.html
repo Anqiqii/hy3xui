@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎~Welcome to Nginx WEB</title>
+    <!-- 引入Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(to right, #6d10e6, #ffb52b);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="height: 100vh;">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">Welcome To Nginx</h3>
+                        <p class="text-center"><small>您目前访问的是Anqiqii示例网站</small></p>
+                        <form id="loginForm" action="/login" method="post">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">用户名</label>
+                                <input type="text" class="form-control" id="username" placeholder="请输入用户名">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">密码</label>
+                                <input type="password" class="form-control" id="password" placeholder="请输入密码">
+                            </div>
+                            <a href="https://github.com/Anqiqii/VPS-GO" class="btn btn-primary w-100">Github</a>
+                            <p></p>
+                        </form>
+                        <a href="https://github.com/Anqiqii/VPS-GO" class="btn btn-info w-100">查看特价VPS汇总</a>
+                        <p class="text-center"><small>欢迎关注Anqiqii</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var form = document.getElementById('loginForm');
+            form.addEventListener('submit', function (event) {
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
+                if (username.trim() === '' || password.trim() === '') {
+                    event.preventDefault(); // 阻止表单提交
+                    alert('用户名和密码不能为空！');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

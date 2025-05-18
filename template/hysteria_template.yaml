@@ -1,0 +1,14 @@
+listen: :443
+
+tls:
+  cert: /etc/cert/ca.crt
+  key: /etc/cert/ca.key
+
+auth:
+  type: userpass
+  userpass:
+    user1: thznc2LA7ZUOs
+
+bandwidth:
+  up: 85 mbps
+  down: 35 mbps

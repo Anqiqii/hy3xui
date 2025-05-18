@@ -1,0 +1,20 @@
+listen: :443
+
+tls:
+  cert: /etc/cert/pand.100896.xyz_ecc/fullchain.cer
+  key: /etc/cert/pand.100896.xyz_ecc/pand.100896.xyz.key
+
+auth:
+  type: userpass
+  userpass:
+    user1: thznc2LA7ZUOs
+
+masquerade: 
+  type: proxy
+  proxy:
+    url: http://pand.100896.xyz/ 
+    rewriteHost: true
+
+bandwidth:
+  up: 85 mbps
+  down: 35 mbps

@@ -1,0 +1,69 @@
+version: '3.8'
+services:
+
+  nginx:
+    image: nginx:latest
+    restart: always
+    container_name: nginx
+    network_mode: host
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/cert:/etc/nginx/cert
+
+  # xui:
+  #   image: alireza7/x-ui
+  #   container_name: xui
+  #   volumes:
+  #     - ./x-uiw/db/:/etc/x-ui/
+  #   environment:
+  #     XRAY_VMESS_AEAD_FORCED: "false"
+  #   tty: true
+  #   network_mode: host
+  #   restart: unless-stopped
+
+  x-ui:
+    image: ghcr.io/mhsanaei/3x-ui:latest
+    container_name: x-ui
+    volumes:
+      - ./x-ui/db/:/etc/x-ui/
+    environment:
+      XRAY_VMESS_AEAD_FORCED: "false"
+    tty: true
+    network_mode: host
+    restart: unless-stopped
+
+
+  hysteria:
+    image: tobyxdd/hysteria
+    container_name: hysteria
+    restart: always
+    ports:
+      - "443:443/udp"
+    networks:
+      anqiqii:
+        ipv4_address: 192.168.15.5
+    volumes:
+      - ./nginx/cert/:/etc/cert/
+      - ./hysteria2/hysteria.yaml:/etc/hysteria.yaml
+    command: ["server", "-c", "/etc/hysteria.yaml"]
+
+  acme.sh:
+    image: neilpang/acme.sh
+    restart: always
+    container_name: acme.sh
+    volumes:
+      - ./nginx/cert:/acme.sh
+    networks:
+      anqiqii:
+        ipv4_address: 192.168.15.35
+    command: daemon
+
+
+networks:
+  anqiqii:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.15.0/24
+          gateway: 192.168.15.1
